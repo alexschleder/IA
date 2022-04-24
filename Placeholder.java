@@ -4,19 +4,20 @@ import java.io.*;
 public class Placeholder {
 
     public static void main(String args[]) {
-        ArrayList<int[][]> a = loadFile("pares10.txt");
+        // ArrayList<int[][]> a = loadFile("pares10.txt");
 
-        for(int[][] mat : a) {
-            for(int[] linha : mat) {
-                for(int num : linha) {
-                    System.out.print(num + " ");
-                }
-                System.out.println();
-            }
-            System.out.println();
-        }
+        // for(int[][] mat : a) {
+        //     for(int[] linha : mat) {
+        //         for(int num : linha) {
+        //             System.out.print(num + " ");
+        //         }
+        //         System.out.println();
+        //     }
+        //     System.out.println();
+        // }
     }
 
+    //public ArrayList<int[][]> loadFile(String fileName) {
     public static ArrayList<int[][]> loadFile(String fileName) {
         ArrayList<int[][]> result = new ArrayList<>();
 
