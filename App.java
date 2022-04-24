@@ -4,9 +4,8 @@ import java.io.*;
 public class App {
 
     public static void main(String args[]) {
-        // ArrayList<int[][]> a = loadFile("pares10.txt");
-
-        // for(int[][] mat : a) {
+        ArrayList<int[][]> teste = loadFile("pares10.txt");
+        // for(int[][] mat : teste) {
         //     for(int[] linha : mat) {
         //         for(int num : linha) {
         //             System.out.print(num + " ");
@@ -15,6 +14,21 @@ public class App {
         //     }
         //     System.out.println();
         // }
+
+        int tamPopulacao = 100;
+        boolean elitismo = false;
+        double chanceMutacao = 0.1;
+        int maxVal = teste.get(0).length;
+        int quantGeracoes = 5;
+
+        Geracao geracao = new Geracao(tamPopulacao, elitismo, chanceMutacao, maxVal, teste.get(0), teste.get(1));
+        
+        System.out.println("Geracao 0:\n" + geracao.getStats());
+
+        for(int i=1; i<quantGeracoes; i++) {
+            geracao = new Geracao(geracao, teste.get(0), teste.get(1));
+            System.out.println("Geracao " + i + ":\n" + geracao.getStats());
+        }
     }
 
     public static ArrayList<int[][]> loadFile(String fileName) {
