@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Placeholder {
+public class App {
 
     public static void main(String args[]) {
         // ArrayList<int[][]> a = loadFile("pares10.txt");
@@ -17,8 +17,7 @@ public class Placeholder {
         // }
     }
 
-    //public static ArrayList<int[][]> loadFile(String fileName) {
-    public ArrayList<int[][]> loadFile(String fileName) {
+    public static ArrayList<int[][]> loadFile(String fileName) {
         ArrayList<int[][]> result = new ArrayList<>();
 
         try {
