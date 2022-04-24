@@ -17,8 +17,8 @@ public class Placeholder {
         // }
     }
 
-    //public ArrayList<int[][]> loadFile(String fileName) {
-    public static ArrayList<int[][]> loadFile(String fileName) {
+    //public static ArrayList<int[][]> loadFile(String fileName) {
+    public ArrayList<int[][]> loadFile(String fileName) {
         ArrayList<int[][]> result = new ArrayList<>();
 
         try {
