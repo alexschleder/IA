@@ -4,7 +4,7 @@ import java.io.*;
 public class App {
 
     public static void main(String args[]) {
-        ArrayList<int[][]> teste = loadFile("pares10.txt");
+        //ArrayList<int[][]> teste = loadFile("pares10.txt");
         // for(int[][] mat : teste) {
         //     for(int[] linha : mat) {
         //         for(int num : linha) {
@@ -15,11 +15,23 @@ public class App {
         //     System.out.println();
         // }
 
-        int tamPopulacao = 10;
+        if(args.length < 5) {
+            System.out.println("Usage: ");
+            System.out.println("java App <arquivo> <numGeracoes> <tamPopulacao> <chanceMutacao> <s/n elitismo>");
+            
+            return;
+        }
+
+        ArrayList<int[][]> teste = loadFile(args[0]);
+        int quantGeracoes = Integer.parseInt(args[1]);
+        int tamPopulacao = Integer.parseInt(args[2]);
+        double chanceMutacao = Double.parseDouble(args[3]);
         boolean elitismo = true;
-        double chanceMutacao = 0.1;
+
+        if(args[4].equals("s"))
+            elitismo = false;
+
         int maxVal = teste.get(0).length;
-        int quantGeracoes = 10;
 
         Geracao geracao = new Geracao(tamPopulacao, elitismo, chanceMutacao, maxVal, teste.get(0), teste.get(1));
         
