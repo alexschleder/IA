@@ -15,11 +15,11 @@ public class App {
         //     System.out.println();
         // }
 
-        int tamPopulacao = 100;
-        boolean elitismo = false;
+        int tamPopulacao = 10;
+        boolean elitismo = true;
         double chanceMutacao = 0.1;
         int maxVal = teste.get(0).length;
-        int quantGeracoes = 5;
+        int quantGeracoes = 10;
 
         Geracao geracao = new Geracao(tamPopulacao, elitismo, chanceMutacao, maxVal, teste.get(0), teste.get(1));
         

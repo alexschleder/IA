@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Collections;
 import java.lang.Comparable;
+import java.math.*;
 
 public class CromossomoAlunos implements Comparable<CromossomoAlunos>
 {
@@ -44,6 +45,7 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
     public int fitness(int[][] prefManha, int[][] prefTarde)
     {
         int result = 0;
+        //System.out.println(cromossomo.size() + " " + maxVal + "\n");
         for (int alunoManha = 0; alunoManha < cromossomo.size(); alunoManha++)
         {
             int val = 0;
@@ -78,16 +80,34 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
     public static void crossover(CromossomoAlunos p1, CromossomoAlunos p2, CromossomoAlunos c1, CromossomoAlunos c2)
     {
        ArrayList<Integer> cycle = new ArrayList<>();
+       ArrayList<Integer>[] cycles = new ArrayList[p1.getMaxVal()];
        for (int i = 0; i < p1.getMaxVal(); i++)
        {
             cycle = new ArrayList<Integer>();
             int atual = p1.getVal(i);
             int next = p2.getVal(i);
-            while (atual != next)
+            int comeco = atual;
+            while (next != comeco)
             {
                 cycle.add(atual);
-                next = atual;
-                next = p2.getVal(p2.cromossomo.indexOf(next));
+                atual = next;
+                //System.out.println(atual + " " + next);
+                next = p2.getVal(p1.cromossomo.indexOf(atual));
+            }
+            cycle.add(atual);
+            //System.out.println(cycle);
+            cycles[i] = cycle;
+       }
+
+       int best = p1.maxVal + 1;
+       int ideal = p1.maxVal/2;
+       for (int i = 0; i < cycles.length; i++)
+       {
+            int current = Math.abs(cycles[i].size() - ideal);
+            if (current < best)
+            {
+                best = current;
+                cycle = cycles[i];
             }
        }
        
@@ -112,15 +132,30 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
        {
             if (cycle.contains(p2.getVal(i)))
             {
-                result1.add(p2.getVal(i));
+                result2.add(p2.getVal(i));
             }
             else
             {
-                result1.add(p1.getVal(i));
+                result2.add(p1.getVal(i));
             }
        }
 
        c2.cromossomo = result2;
+
+       for (int i = 0; i < p1.maxVal; i++)
+       {
+           if (Collections.frequency(c1.cromossomo, i) > 1)
+           {
+                System.out.println("---------------");
+                System.out.println(cycle);
+                System.out.println(p1.cromossomo);
+                System.out.println(p2.cromossomo);
+                System.out.println(c1.cromossomo);
+                System.out.println("---------------");
+           }
+       }
+       //System.out.println(c1.cromossomo.size() + " " + c1.maxVal + "\n");
+       //System.out.println(c2.cromossomo.size() + " " + c2.maxVal + "\n");
     }
 
     public void mutate(double chance)
@@ -134,7 +169,7 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
                 do 
                 {
                     switchIndex = generator.nextInt(cromossomo.size());
-                } while (switchIndex != i);
+                } while (switchIndex == i);
                 Collections.swap(cromossomo, i, switchIndex);
             }
         }

@@ -47,19 +47,24 @@ public class Geracao
             {
                 p2Index = r.nextInt(tamanhoPopulacao);
             } while (p1Index == p2Index);
-            CromossomoAlunos pai = populacao.get(p1Index); 
-            CromossomoAlunos mae = populacao.get(p2Index); 
+            CromossomoAlunos pai = anterior.populacao.get(p1Index); 
+            CromossomoAlunos mae = anterior.populacao.get(p2Index); 
             CromossomoAlunos c1 = new CromossomoAlunos(pai.getMaxVal());
             CromossomoAlunos c2 = new CromossomoAlunos(pai.getMaxVal());
             CromossomoAlunos.crossover(pai, mae, c1, c2);
             populacao.add(c1);
+            c1.mutate(chanceMutacao);
+            c2.mutate(chanceMutacao);
             c1.fitness(prefManha, prefTarde);
             c2.fitness(prefManha, prefTarde);
             i++;
-            populacao.add(c2);
-            i++;
+            if (i < tamanhoPopulacao)
+            {
+                populacao.add(c2);
+                i++;
+            }
         }
-        populacao.get(i).fitness(prefManha, prefTarde);
+        //populacao.get(i).fitness(prefManha, prefTarde);
     }
     
     public String getStats()
@@ -75,6 +80,10 @@ public class Geracao
         fitnessMedia /= tamanhoPopulacao;
         result += "Media da pontuacao de fitness: " + fitnessMedia + "\n";
         result += "Melhor cromossomo: " + populacao.get(0); 
+        for (int i = 0; i < tamanhoPopulacao; i++)
+        {
+            //result += populacao.get(i);
+        }
 
         return result;
     }
