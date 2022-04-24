@@ -70,6 +70,11 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
         return result;
     }
 
+    public int getFitness()
+    {
+        return fitness;
+    }
+
     public static void crossover(CromossomoAlunos p1, CromossomoAlunos p2, CromossomoAlunos c1, CromossomoAlunos c2)
     {
        ArrayList<Integer> cycle = new ArrayList<>();
@@ -141,5 +146,13 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
         if (this.fitness < c.fitness) return -1;
         else if (this.fitness == c.fitness) return 0;
         else return 1;
+    }
+
+    public String toString()
+    {
+        String result = "";
+        result += "Cromossomo: " + cromossomo + "\n";
+        result += "Fitness: " + fitness;
+        return result;
     }
 }
