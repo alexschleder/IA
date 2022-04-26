@@ -76,7 +76,7 @@ public class Geracao
         } while (p1Index == p2Index);
         CromossomoAlunos p1 = populacao.get(p1Index); 
         CromossomoAlunos p2 = populacao.get(p1Index); 
-        if (p1.compareTo(p2) == 1) return p1;
+        if (p1.compareTo(p2) == -1) return p1;
         else return p2;
     }
 
