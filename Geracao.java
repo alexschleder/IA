@@ -41,17 +41,15 @@ public class Geracao
         }
         while (i < tamanhoPopulacao)
         {
-            int p1Index = r.nextInt(tamanhoPopulacao);
-            int p2Index;
-            do 
+            CromossomoAlunos p1 = anterior.torneio(); 
+            CromossomoAlunos p2 = p1;
+            while (p1 == p2)
             {
-                p2Index = r.nextInt(tamanhoPopulacao);
-            } while (p1Index == p2Index);
-            CromossomoAlunos pai = anterior.populacao.get(p1Index); 
-            CromossomoAlunos mae = anterior.populacao.get(p2Index); 
-            CromossomoAlunos c1 = new CromossomoAlunos(pai.getMaxVal());
-            CromossomoAlunos c2 = new CromossomoAlunos(pai.getMaxVal());
-            CromossomoAlunos.crossover(pai, mae, c1, c2);
+                p2 = anterior.torneio();
+            }
+            CromossomoAlunos c1 = new CromossomoAlunos(p1.getMaxVal());
+            CromossomoAlunos c2 = new CromossomoAlunos(p1.getMaxVal());
+            CromossomoAlunos.crossover(p1, p2, c1, c2);
             populacao.add(c1);
             c1.mutate(chanceMutacao);
             c2.mutate(chanceMutacao);
@@ -67,6 +65,21 @@ public class Geracao
         //populacao.get(i).fitness(prefManha, prefTarde);
     }
     
+    public CromossomoAlunos torneio()
+    {
+        Random r = new Random();
+        int p1Index = r.nextInt(tamanhoPopulacao);
+        int p2Index;
+        do 
+        {
+            p2Index = r.nextInt(tamanhoPopulacao);
+        } while (p1Index == p2Index);
+        CromossomoAlunos p1 = populacao.get(p1Index); 
+        CromossomoAlunos p2 = populacao.get(p1Index); 
+        if (p1.compareTo(p2) == 1) return p1;
+        else return p2;
+    }
+
     public String getStats()
     {
         String result = "";
