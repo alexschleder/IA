@@ -34,9 +34,10 @@ public class Geracao
         this.populacao = new ArrayList<CromossomoAlunos>();
         int i = 0;
         Random r = new Random();
+        Collections.sort(anterior.populacao);
         if (elitismo)
         {   
-            populacao.add(anterior.populacao.get(i));
+            populacao.add(anterior.populacao.get(0));
             i++;
         }
         while (i < tamanhoPopulacao)
@@ -62,7 +63,6 @@ public class Geracao
                 i++;
             }
         }
-        //populacao.get(i).fitness(prefManha, prefTarde);
     }
     
     public CromossomoAlunos torneio()
@@ -92,11 +92,11 @@ public class Geracao
         }
         fitnessMedia /= tamanhoPopulacao;
         result += "Media da pontuacao de fitness: " + fitnessMedia + "\n";
-        result += "Melhor cromossomo: " + populacao.get(0); 
-        for (int i = 0; i < tamanhoPopulacao; i++)
+        for (int i = 1; i < tamanhoPopulacao; i++)
         {
-            //result += populacao.get(i);
+            result += populacao.get(i);
         }
+        result += "Melhor cromossomo:\n" + populacao.get(0) + "\n" + populacao.get(0).pares(); 
 
         return result;
     }

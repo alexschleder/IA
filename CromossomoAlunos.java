@@ -45,7 +45,6 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
     public int fitness(int[][] prefManha, int[][] prefTarde)
     {
         int result = 0;
-        //System.out.println(cromossomo.size() + " " + maxVal + "\n");
         for (int alunoManha = 0; alunoManha < cromossomo.size(); alunoManha++)
         {
             int val = 0;
@@ -91,11 +90,9 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
             {
                 cycle.add(atual);
                 atual = next;
-                //System.out.println(atual + " " + next);
                 next = p2.getVal(p1.cromossomo.indexOf(atual));
             }
             cycle.add(atual);
-            //System.out.println(cycle);
             cycles[i] = cycle;
        }
 
@@ -154,8 +151,6 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
                 System.out.println("---------------");
            }
        }
-       //System.out.println(c1.cromossomo.size() + " " + c1.maxVal + "\n");
-       //System.out.println(c2.cromossomo.size() + " " + c2.maxVal + "\n");
     }
 
     public void mutate(double chance)
@@ -186,8 +181,19 @@ public class CromossomoAlunos implements Comparable<CromossomoAlunos>
     public String toString()
     {
         String result = "";
-        result += "Cromossomo: " + cromossomo + "\n";
-        result += "Fitness: " + fitness;
+        result += "Cromossomo: " + cromossomo + ", ";
+        result += "Fitness: " + fitness +"\n";
+        return result;
+    }
+
+    public String pares()
+    {
+        String result = "";
+        result += "duplas:\n";
+        for (int i = 0; i < maxVal; i++)
+        {
+            result +=  i+1 + "M : " + (cromossomo.get(i) + 1) + "T\n";
+        }
         return result;
     }
 }

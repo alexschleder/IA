@@ -1,3 +1,5 @@
+//Alessandra Schleder, Jonas Campos e Raphael Remião
+
 import java.util.*;
 import java.io.*;
 
@@ -26,10 +28,10 @@ public class App {
         int quantGeracoes = Integer.parseInt(args[1]);
         int tamPopulacao = Integer.parseInt(args[2]);
         double chanceMutacao = Double.parseDouble(args[3]);
-        boolean elitismo = true;
+        boolean elitismo = false;
 
         if(args[4].equals("s"))
-            elitismo = false;
+            elitismo = true;
 
         int maxVal = teste.get(0).length;
 
